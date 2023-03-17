@@ -28,8 +28,20 @@ print(persona1.nombre)
 print(persona1.apellido)
 print(persona1.edad)
 
+# Modificacion de valores de un objeto
+persona1.nombre = 'Pepe'
+persona1.apellido = 'Juarez'
+persona1.edad = 29
+print(f'Objeto persona: {persona1.nombre} {persona1.apellido} {persona1.edad}')
+
 # segundo objeto
 persona2 = Persona('Laura', 'Gomez', 30)
-print(persona2.nombre)
-print(persona2.apellido)
-print(persona2.edad)
+# print(persona2.nombre)
+# print(persona2.apellido)
+# print(persona2.edad)
+print(f'Objeto persona: {persona2.nombre} {persona2.apellido} {persona2.edad}')
+# Modificacion de los valores del segundo objeto
+persona2.nombre = 'Andrea'
+persona2.apellido = 'Gonzalez'
+persona2.edad = 26
+print(f'Objeto persona: {persona2.nombre} {persona2.apellido} {persona2.edad}')
