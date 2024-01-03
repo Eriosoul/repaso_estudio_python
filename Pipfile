@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 reportlab = "*"
+python-dotenv = "*"
+requests = "*"
+bs4 = "*"
 
 [dev-packages]
 
