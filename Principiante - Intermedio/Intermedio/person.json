@@ -1,0 +1,11 @@
+{
+  "nombre": "John Doe",
+  "edad": 30,
+  "ciudad": "Ejemplo City",
+  "trabajo": "Desarrollador",
+  "hobbies": ["programación", "lectura", "deportes"],
+  "contacto": {
+    "email": "john@example.com",
+    "telefono": "555-1234"
+  }
+}
