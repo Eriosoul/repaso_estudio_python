@@ -6,6 +6,7 @@ def read_data(json_name):
         data = json.load(file)
     return data
 
+
 def show_data(data):
     for clave, valor in data.items():
         print(f"{clave}: {valor}")
