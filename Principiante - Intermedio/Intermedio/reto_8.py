@@ -15,7 +15,7 @@ Asegúrate de manejar cualquier entrada incorrecta del usuario y permite que pue
 ¡Buena suerte! Si tienes alguna pregunta o necesitas ayuda, estoy aquí para ayudarte.
 """
 
-
+# Mi respuesta
 def celsius_to_fahrenh(temperatura):
     F = (temperatura * 9/5) + 32
     print(F)
@@ -52,6 +52,48 @@ def main():
         except Exception as a:
             print(a)
 
+
+if __name__ == '__main__':
+    main()
+
+
+# respuesta del ejercicio
+
+def celsius_to_fahrenh(temperatura):
+    return (temperatura * 9/5) + 32
+
+def fahrenh_to_celsius(temperatura):
+    return (temperatura - 32) * 5/9
+
+def convertir_temperatura(opcion, temperatura):
+    if opcion == 1:
+        return celsius_to_fahrenh(temperatura)
+    elif opcion == 2:
+        return fahrenh_to_celsius(temperatura)
+    else:
+        raise ValueError("Opción no válida")
+
+def main():
+    while True:
+        print("=== Menu ===")
+        print("Opcion 1: Celsius a Fahrenheit ")
+        print("Opcion 2: Fahrenheit a Celsius")
+        print("Opcion 3: Salir ")
+
+        try:
+            option = int(input("Seleciona una opcion: "))
+            if option == 3:
+                print("Gracias por confiar en nosotros ... ")
+                break
+
+            temperatura = float(input("Introude la temperatura que desea calcular: "))
+            resultado = convertir_temperatura(option, temperatura)
+            print(f"Resultado: {resultado}")
+
+        except ValueError as e:
+            print(f"Error: {e}")
+        except Exception as a:
+            print(a)
 
 if __name__ == '__main__':
     main()
