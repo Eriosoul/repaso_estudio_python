@@ -1,4 +1,4 @@
-form
+from pprint import pprint
 
 """
 Ejercicio: Sistema de Gestión de Tareas
@@ -62,16 +62,12 @@ def add_data(name_work, description_work, status_work):
     print("Nueva tarea añadida:")
     print(new_task_data)
 
-# def show_data():
-#     for task_id, task_info in work_system.items():
-#         name_work = task_info["name_work"]
-#         description = task_info["description_work"]
-#         print(f"ID: {task_id}, Name: {name_work} = Description : {description}")
-
 
 if __name__ == '__main__':
     data = create_work()
-    # show_data()
-    add_data(name_work=data, description_work=data, status_work=data)
+
+    # Usar *data al llamar a add_data desempaqueta los elementos de la tupla y
+    # los pasa como argumentos individuales a la función add_data.
+    add_data(*data)
     print("Lista de tareas actualizada:")
-    print(work_system)
+    pprint(work_system)
