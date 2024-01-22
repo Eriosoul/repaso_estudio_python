@@ -63,11 +63,43 @@ def add_data(name_work, description_work, status_work):
     print(new_task_data)
 
 
-if __name__ == '__main__':
-    data = create_work()
+def show_all_data():
+    for task_id in work_system:
+        print(task_id)
 
-    # Usar *data al llamar a add_data desempaqueta los elementos de la tupla y
-    # los pasa como argumentos individuales a la función add_data.
-    add_data(*data)
-    print("Lista de tareas actualizada:")
-    pprint(work_system)
+
+def menu():
+    try:
+        print("1. Para crear una tarea")
+        print("2. Mostrar todas las tareas existentes ")
+        print("3. Marcar Tarea como Completada")
+        print("4. Permitir al usuario eliminar una tarea")
+        print("5. Salir del programa")
+        option = int(input("Seleccione su opcion: "))
+        return option
+    except ValueError as e:
+        print("Error al introducir el valor: ", e)
+
+
+if __name__ == '__main__':
+    try:
+        while True:
+            option = menu()
+
+            if option == 1:
+                data = create_work()
+                # Usar *data al llamar a add_data desempaqueta los elementos de la tupla y
+                # los pasa como argumentos individuales a la función add_data.
+                add_data(*data)
+                print("Lista de tareas actualizada:")
+                pprint(work_system)
+            elif option == 2:
+                show_all_data()
+            elif option == 3:
+                pass
+            else:
+                print("Error a la hora de selccionar la opcion...")
+    except KeyboardInterrupt as interrupt:
+        print("Se ha detenido el programa: ", interrupt)
+    except Exception as e:
+        print(e)
