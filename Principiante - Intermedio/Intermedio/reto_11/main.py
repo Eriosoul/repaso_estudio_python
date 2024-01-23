@@ -33,6 +33,12 @@ work_system = [
         "description_work": "Descripción de otra tarea.",
         "status": "pendiente"
     },
+    {
+        "id": 3,
+        "name_work": "Otra tarea",
+        "description_work": "Descripción de otra tarea.",
+        "status": "pendiente"
+    },
 ]
 
 
@@ -68,6 +74,40 @@ def show_all_data():
         print(task_id)
 
 
+def show_p_data():
+    show_all_data()
+    new_status = "completada"
+    for p in work_system:
+        status = p.get("status", "N/A")
+        if status.lower() == "pendiente":
+            print(p)
+            option = int(input("Seleciona la tarea que desea modificar: "))
+            task_id = p.get("id")
+            if option == task_id:
+                option2 = input("Esta seguro de que deseas modificar esa tarea? (Y/N): ").upper()
+                if option2 == "Y":
+                    p["status"] = new_status
+                    print("Tarea modificada")
+                    break
+                else:
+                    print("Tarea no modificada :D")
+
+
+def delete_data():
+    show_all_data()
+    delete_task = int(input("Slecione el id de la tarea que desea eleiminar: "))
+    for task in work_system:
+        task_id = task.get("id")
+        if delete_task == task_id:
+            print(delete_task, task_id)
+            option = input("Esta seguro de que desea eliminar la tarea?(Y/N): ").upper()
+            if option == "Y":
+                work_system.remove(task)
+                print("eliminada")
+            else:
+                print("No se ha eliminado")
+
+
 def menu():
     try:
         print("1. Para crear una tarea")
@@ -96,7 +136,12 @@ if __name__ == '__main__':
             elif option == 2:
                 show_all_data()
             elif option == 3:
-                pass
+                show_p_data()
+            elif option == 4:
+                delete_data()
+            elif option == 5:
+                print("Gracias por su visita :D")
+                break
             else:
                 print("Error a la hora de selccionar la opcion...")
     except KeyboardInterrupt as interrupt:
