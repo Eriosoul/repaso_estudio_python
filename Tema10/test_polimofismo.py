@@ -9,6 +9,7 @@ def imprimir_detalles(objeto):
     if isinstance(objeto, Gerente):
         print(objeto.departamento)
 
+
 empleado = Empleado('Juan', 5000)
 imprimir_detalles(empleado)
 
