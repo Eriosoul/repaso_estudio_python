@@ -21,6 +21,9 @@ Salir del Programa:
 
 Proporciona una opción para que el usuario salga del programa.
 """
+from templates.system import SystemBook
+from templates.book import Book
+from templates.library_system import LibrarySystem
 
 
 def menu():
@@ -35,14 +38,20 @@ def menu():
         if 1 < option < 7:
             return option
         else:
-            raise ValueError("Opcion invalida. Por favor sleecione una opcion")
+            raise ValueError("Opcion invalida. Por favor seleccione una opcion")
     except ValueError as e:
         print("Error al introducir el valor: ", e)
 
 
 if __name__ == '__main__':
     try:
-        menu()
+        book_sist = SystemBook(title="", author="", available=0)
+        option = menu()
+        if option == 1:
+            book_sist.add_book()
+        else:
+            print("error")
+
     except KeyboardInterrupt as interrupt:
         print("\nSe ha detenido el programa: ", interrupt)
     except Exception as e:
