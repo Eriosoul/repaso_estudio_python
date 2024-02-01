@@ -1,1 +1,16 @@
-{}
+{
+    "Library": [
+        {
+            "Id": 1,
+            "Titulo": "dadada",
+            "Autor": "daadad",
+            "Disponibilidad": 32131231
+        },
+        {
+            "Id": 2,
+            "Titulo": "Super Mario 64",
+            "Autor": "yoshima",
+            "Disponibilidad": 5897
+        }
+    ]
+}

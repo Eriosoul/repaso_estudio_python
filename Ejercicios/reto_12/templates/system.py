@@ -13,6 +13,8 @@ class SystemBook:
         self.title_book = title
         self.author_book = author
         self.available_book = available
+        self.book_list = []
+        self._id = 0
 
     def add_book(self):
         try:
@@ -25,31 +27,43 @@ class SystemBook:
         except Exception as e:
             print(e)
 
-    def struct_add_book(self):
-        my_struct = {
-            "Nombre del libro": self.title_book,
-            "Autor del libro": self.author_book,
-            "Disponibilidad": self.available_book
-        }
+    def read_data(self):
         try:
-            # Verificar si el archivo JSON existe
-            if not self.check_book.exist():
-                print("No se pudo verificar la existencia del archivo JSON.")
-                return
+            with open(self.check_book.library_book, 'r') as file:
+                existing_data = json.load(file)
+                self.data = existing_data
+        except FileNotFoundError:
+            self.data = {"Library": []}
 
-            # Obtener la lista de libros del archivo JSON
-            with open(self.check_book.library_book, "r") as file:
-                book_list = json.load(file)
+    def add_data_to_json(self):
+        self.read_data()
+        try:
+            # Verifica si hay libros en la lista, si no, inicializa la lista
+            if "Library" not in self.data:
+                self.data["Library"] = []
 
-            # Agregar el nuevo libro a la lista
-            book_list.append(my_struct)
+            # Incrementa el id para cada nuevo libro agregado
+            if not self.data["Library"]:
+                self._id = 1
+            else:
+                self._id = self.data["Library"][-1]["Id"] + 1  # Usa el id del último libro como base
 
-            # Escribir la lista actualizada al archivo JSON
-            with open(self.check_book.library_book, "a") as file:
-                json.dump(book_list, file, indent=4)
+            # Crea el diccionario de datos para el nuevo libro
+            data = {
+                "Id": self._id,
+                "Titulo": self.title_book,
+                "Autor": self.author_book,
+                "Disponibilidad": self.available_book
+            }
+
+            # Agrega el nuevo libro a la lista de libros
+            self.data["Library"].append(data)
+
+            # Guarda los datos actualizados en el archivo JSON
+            with open(self.check_book.library_book, 'w') as file:
+                json.dump(self.data, file, indent=4)
 
             print("¡Libro agregado correctamente!")
-
         except Exception as e:
             print("Error al agregar el libro:", e)
 
@@ -73,10 +87,14 @@ def menu():
 
 if __name__ == '__main__':
     l = SystemBook(title="", author="", available=0)
-    option = menu()
-    if option == 1:
-        l.add_book()
-        print("mostramos informacion ")
-        l.struct_add_book()
-    else:
-        print("error")
+    while True:
+        option = menu()
+        if option == 1:
+            l.add_book()
+            print("mostramos informacion ")
+            l.read_data()
+            l.add_data_to_json()
+        if option == 2:
+           pass
+        else:
+            print("error")
