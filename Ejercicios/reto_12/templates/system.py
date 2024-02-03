@@ -87,14 +87,26 @@ def menu():
 
 if __name__ == '__main__':
     l = SystemBook(title="", author="", available=0)
-    while True:
-        option = menu()
-        if option == 1:
-            l.add_book()
-            print("mostramos informacion ")
-            l.read_data()
-            l.add_data_to_json()
-        if option == 2:
-           pass
-        else:
-            print("error")
+    try:
+        while True:
+            option = menu()
+            if option == 1:
+                l.add_book()
+                print("mostramos informacion ")
+                l.read_data()
+                l.add_data_to_json()
+            if option == 2:
+                pass
+            if option == 3:
+                pass
+            if option == 5:
+                pass
+            if option == 6:
+                print("Gracias por visitarnos, vuelva pronto :D")
+                break
+            else:
+                print("Error, no se ha elegido bien la informacion de nuestro menu")
+    except KeyboardInterrupt as interrupt:
+        print("Se ha interrumpido del programa", interrupt)
+    except Exception as e:
+        print("Error: ", e)
