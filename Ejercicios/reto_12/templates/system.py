@@ -1,5 +1,5 @@
 import json
-
+import pprint
 from book import Book
 from library_system import LibrarySystem
 from Ejercicios.reto_12.check_book_data import CheckBookData
@@ -67,6 +67,17 @@ class SystemBook:
         except Exception as e:
             print("Error al agregar el libro:", e)
 
+    def show_all_data(self):
+        pp = pprint.PrettyPrinter(indent=4)
+        self.read_data()
+        try:
+            with open(self.check_book.library_book) as file:
+                data = json.load(file)
+                all_data = data["Library"]
+                pp.pprint(all_data)
+        except Exception as e:
+            print(e)
+
 
 def menu():
     try:
@@ -100,7 +111,7 @@ if __name__ == '__main__':
             if option == 3:
                 pass
             if option == 5:
-                pass
+                l.show_all_data()
             if option == 6:
                 print("Gracias por visitarnos, vuelva pronto :D")
                 break
