@@ -11,6 +11,18 @@
             "Titulo": "Super Mario 64",
             "Autor": "yoshima",
             "Disponibilidad": 5897
+        },
+        {
+            "Id": 3,
+            "Titulo": "aaaa",
+            "Autor": "yoshima",
+            "Disponibilidad": 0
+        },
+        {
+            "Id": 4,
+            "Titulo": "a",
+            "Autor": "yoshima",
+            "Disponibilidad": 1
         }
     ]
 }

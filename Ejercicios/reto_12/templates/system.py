@@ -67,6 +67,85 @@ class SystemBook:
         except Exception as e:
             print("Error al agregar el libro:", e)
 
+    def search_book(self):
+        self.read_data()
+        title = str(input("¿Que libro desea buscar, introduzca su titulo?: "))
+        try:
+            with open(self.check_book.library_book) as file:
+                data = json.load(file)
+                library = data.get("Library", [])
+                found_books = [book for book in library if book.get("Titulo") == title]
+                if found_books:
+                    print("\n")
+                    for book in found_books:
+                        print("Libro encontrado: ")
+                        print(f"ID: {book['Id']}")
+                        print(f"Título: {book['Titulo']}")
+                        print(f"Autor: {book['Autor']}")
+                        print(f"Disponibilidad: {book['Disponibilidad']}")
+                        print("\n")
+                else:
+                    print(f"No se encontró ningún libro con el título '{title}'.")
+        except Exception as e:
+            print("Error:", e)
+
+    def get_book(self):
+        self.read_data()
+        title = str(input("¿Que libro te quieres llevar, introduce su titulo?: "))
+        try:
+            with open(self.check_book.library_book) as file:
+                data = json.load(file)
+                library = data.get("Library", [])
+
+                # Verifica la disponibilidad de los libros
+                check_available = [book for book in library if
+                                   book.get("Titulo") == title and book.get("Disponibilidad") > 0]
+                if check_available:
+                    # Actualiza la disponibilidad del libro
+                    for book in library:
+                        if book.get("Titulo") == title:
+                            book["Disponibilidad"] -= 1
+                    # Guarda los datos actualizados en el archivo JSON
+                    with open(self.check_book.library_book, 'w') as file:
+                        json.dump(data, file, indent=4)
+
+                    # Muestra la información del libro retirado
+                    for book in check_available:
+                        print("¡Libro encontrado!")
+                        print(f"ID: {book['Id']}")
+                        print(f"Título: {book['Titulo']}")
+                        print(f"Autor: {book['Autor']}")
+                        print(f"Disponibilidad restante: {book['Disponibilidad']}")
+                else:
+                    print(f"El libro '{title}' no está disponible.")
+        except Exception as e:
+            print("Error:", e)
+
+    def get_book_back(self):
+        self.read_data()
+        try:
+            title = str(input("¿Que libro te quieres devolver, introduce su titulo?: "))
+            with open(self.check_book.library_book) as file:
+                data = json.load(file)
+                library = data.get("Library", [])
+                check_available =[book for book in library if book.get("Titulo") == title]
+                if check_available:
+                    for book in library:
+                        if book.get("Titulo") == title:
+                            book["Disponibilidad"] += 1
+                        with open(self.check_book.library_book, 'w') as file:
+                            json.dump(data, file, indent=4)
+                        for book in check_available:
+                            print("¡Libro devuelto correctamente!")
+                            print(f"ID: {book['Id']}")
+                            print(f"Título: {book['Titulo']}")
+                            print(f"Autor: {book['Autor']}")
+                            print(f"Disponibilidad restante: {book['Disponibilidad']}")
+                else:
+                    print(f"El libro '{title}' no se ha podido devolver.")
+        except Exception as e:
+            print(e)
+
     def show_all_data(self):
         pp = pprint.PrettyPrinter(indent=4)
         self.read_data()
@@ -107,9 +186,11 @@ if __name__ == '__main__':
                 l.read_data()
                 l.add_data_to_json()
             if option == 2:
-                pass
+                l.search_book()
             if option == 3:
-                pass
+                l.get_book()
+            if option == 4:
+                l.get_book_back()
             if option == 5:
                 l.show_all_data()
             if option == 6:
