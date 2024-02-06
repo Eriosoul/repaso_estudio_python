@@ -1,7 +1,7 @@
 import json
 import pprint
-from book import Book
-from library_system import LibrarySystem
+from templates.book import Book
+from templates.library_system import LibrarySystem
 from Ejercicios.reto_12.check_book_data import CheckBookData
 
 

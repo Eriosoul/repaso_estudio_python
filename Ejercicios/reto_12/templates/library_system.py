@@ -1,5 +1,5 @@
 
-class LibrarySystem():
+class LibrarySystem:
     def __init__(self, available=0):
         self.available = available
 
