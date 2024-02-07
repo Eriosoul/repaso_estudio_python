@@ -10,8 +10,14 @@ class GlobalSongs:
         self.url = os.getenv("LINK")
 
     def get_status(self):
-        r: Response = requests.get(self.url)
-        print(r)
+        try:
+            r: Response = requests.get(self.url)
+            if r.status_code != 200:
+                print("Error al obtener los datos de la web", r)
+            else:
+                print("Conexion exitosa")
+        except Exception as e:
+            print("Error al obtener los datos: ", e)
 
 
 if __name__ == '__main__':
