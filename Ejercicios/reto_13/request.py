@@ -26,12 +26,14 @@ class GlobalSongs:
             print("Error al obtener los datos: ", e)
 
     def get_data(self):
-        soup: BeautifulSoup = BeautifulSoup(self.r.text, "html.parser")
-        data = soup.find('div', class_='h4HgbO_Uu1JYg5UGANeQ.wTUruPetkKdWAR1dd6w4')
-        print(data.text)
+        try:
+            soup: BeautifulSoup = BeautifulSoup(self.r.text, "html.parser")
+            data = soup.find_all('div', class_='h4HgbO_Uu1JYg5UGANeQ.wTUruPetkKdWAR1dd6w4')
+            print(data)
+        except Exception as e:
+            print(e)
 
 
 if __name__ == '__main__':
     g: GlobalSongs = GlobalSongs()
     g.get_status()
-

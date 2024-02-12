@@ -8,6 +8,7 @@ reportlab = "*"
 python-dotenv = "*"
 requests = "*"
 bs4 = "*"
+aiohttp = "*"
 
 [dev-packages]
 
