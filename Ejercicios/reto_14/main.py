@@ -15,7 +15,7 @@ import asyncio
 import aiohttp
 
 
-async def fetch_resource(session, url):
+async def fetchresource(session, url):
     try:
         async with session.get(url) as response:
             return await response.text()
@@ -23,13 +23,13 @@ async def fetch_resource(session, url):
         print(e)
 
 
-async def download_file(urls):
+async def downloadfile(urls):
     try:
         async with aiohttp.ClientSession() as session:
-            tasks = [fetch_resource(session, url) for url in urls]
+            tasks = [fetchresource(session, url) for url in urls]
             return await asyncio.gather(*tasks)
-    except Exception as e:
-        print("Error download file: ", e)
+    except Exception as ef:
+        print("Error download file: ", ef)
 
 
 async def main():
@@ -40,14 +40,14 @@ async def main():
             'https://jsonplaceholder.typicode.com/posts/3'
         ]
 
-        results = await download_file(urls)
+        results = await downloadfile(urls)
         for result in results:
             print(result)
-    except Exception as e:
-        print("Error en la vida", e)
+    except Exception as es:
+        print("Error en la vida", es)
 
 if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
+    loop = asyncio.new_event_loop()
     try:
         loop.run_until_complete(main())
     except Exception as e:
