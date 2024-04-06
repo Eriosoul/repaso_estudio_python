@@ -9,15 +9,10 @@
  * Muestra el contenido de los archivos.
  * Borra los archivos.
  *
- * DIFICULTAD EXTRA (opcional):
- * Utilizando la lógica de creación de los archivos anteriores, crea un
- * programa capaz de leer y transformar en una misma clase custom de tu
- * lenguaje los datos almacenados en el XML y el JSON.
- * Borra los archivos.
+
 """
 import json
 import os
-import pprint
 import xml.etree.ElementTree as xml
 
 
@@ -31,7 +26,7 @@ data = {
 xml_file = "fichero.xml"
 json_file = "fichero.json"
 
-def save_xml():
+def create_xml():
     # posibilidad 1
     # root = xml.ElementTree("data user")
     # child = xml.SubElement(root, "name")
@@ -50,38 +45,64 @@ def save_xml():
     tree.write(xml_file)
 
 
-save_xml()
+create_xml()
 
-with open(xml_file) as file:
-    print(file.read())
+
+def create_json():
+    with open(xml_file) as file:
+        print(file.read())
+
+    # os.remove(xml_file)
+
+    with open(json_file, "w") as file:
+        json.dump(data, file)
+
+    with open(json_file, "r") as file:
+        print(file.read())
+
+    # os.remove(json_file)
+
+
+create_json()
+# Dificultad extra
+"""
+* DIFICULTAD EXTRA (opcional):
+ * Utilizando la lógica de creación de los archivos anteriores, crea un
+ * programa capaz de leer y transformar en una misma clase custom de tu
+ * lenguaje los datos almacenados en el XML y el JSON.
+ * Borra los archivos.
+ """
+
+
+class CustomData:
+    def __init__(self, name, age, birthday, dev_lang):
+        self.name = name
+        self.age = age
+        self.birthday = birthday
+        self.dev_lang = dev_lang
+
+
+with open(xml_file) as xml_data:
+    root = xml.fromstring(xml_data.read())
+    name = root.find("name").text
+    age = root.find("name").text
+    birthday = root.find("birthday").text
+    dev_lang = [item.text for item in root.find("dev_lang")]
+
+    data_from_xml = CustomData(name, age, birthday, dev_lang)
+    print(data_from_xml.__dict__)
+
+with open(json_file, "r") as json_data:
+    data_dict = json.load(json_data)
+    json_class = CustomData(
+        data_dict["name"],
+        data_dict["age"],
+        data_dict["birthday"],
+        data_dict["dev_lang"],
+    )
+
+    print(json_class.__dict__)
+
 
 os.remove(xml_file)
-
-with open(json_file, "w") as file:
-    json.dump(data, file)
-
-with open(json_file, "r") as file:
-    print(file.read())
-
 os.remove(json_file)
-
-# xml_file = "fichero.xml"
-# json_file = "fichero.json"
-#
-# open(xml_file, "a")
-# open(json_file, "a")
-#
-#
-# def generate_data(xml_file, json_file):
-#     name = "pepe"
-#     age = "27"
-#     birthday = "01/01/1990"
-#     dev_lang = ["Python", "Java", "C++", "C"]
-#     with open(xml_file, "a") as file:
-#         file.write(f"{name}, {age}, {birthday}, {dev_lang}")
-#
-#     with open(json_file, "a") as file:
-#         file.write(f"{name}, {age}, {birthday}, {dev_lang}")
-#
-#
-# generate_data(xml_file=xml_file, json_file=json_file)
