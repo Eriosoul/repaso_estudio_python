@@ -15,11 +15,10 @@
  * lenguaje los datos almacenados en el XML y el JSON.
  * Borra los archivos.
 """
-
+import json
 import os
+import pprint
 import xml.etree.ElementTree as xml
-
-
 
 
 data = {
@@ -30,6 +29,7 @@ data = {
 }
 
 xml_file = "fichero.xml"
+json_file = "fichero.json"
 
 def save_xml():
     # posibilidad 1
@@ -40,12 +40,31 @@ def save_xml():
     root = xml.Element("data")
     for key, value in data.items():
         child = xml.SubElement(root, key)
-        child.text = str(value)
+        if isinstance(value, list):
+            for item in value:
+                xml.SubElement(child, "item").text = item
+        else:
+            child.text = str(value)
 
     tree = xml.ElementTree(root)
     tree.write(xml_file)
 
+
 save_xml()
+
+with open(xml_file) as file:
+    print(file.read())
+
+os.remove(xml_file)
+
+with open(json_file, "w") as file:
+    json.dump(data, file)
+
+with open(json_file, "r") as file:
+    print(file.read())
+
+os.remove(json_file)
+
 # xml_file = "fichero.xml"
 # json_file = "fichero.json"
 #
