@@ -11,6 +11,7 @@ bs4 = "*"
 aiohttp = "*"
 ffmpeg = "*"
 numpy = "*"
+pandas = "*"
 
 [dev-packages]
 
