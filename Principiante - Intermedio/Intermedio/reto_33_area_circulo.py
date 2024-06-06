@@ -13,9 +13,9 @@ class GetRCircle:
         n_radio = input("Introduce el radio del circulo: ")
         self.radio_circle = float(n_radio)
         return self.radio_circle
-    # Calcular el area del circulo
 
 
+# Calcular el area del circulo
 class CalculateArea(Pi, GetRCircle):
     def __init__(self):
         Pi.__init__(self)
