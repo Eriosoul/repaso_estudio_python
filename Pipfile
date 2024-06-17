@@ -12,6 +12,7 @@ aiohttp = "*"
 ffmpeg = "*"
 numpy = "*"
 pandas = "*"
+py-androidbuild = "*"
 
 [dev-packages]
 
